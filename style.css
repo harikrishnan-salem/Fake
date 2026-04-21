@@ -1,0 +1,194 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f7f9;
+    display: flex;
+    justify-content: center;
+}
+
+.mobile-container {
+    width: 100%;
+    max-width: 450px;
+    background-color: #fff;
+    min-height: 100vh;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.menu-icon {
+    font-size: 24px;
+    color: #333;
+}
+
+.college-name {
+    flex-grow: 1;
+    margin-left: 20px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #2c3e50;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.small-profile-pic img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid #3498db;
+}
+
+/* Profile Section */
+.profile-header {
+    padding: 25px 20px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.large-profile-pic img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid #5dade2;
+    margin-bottom: 15px;
+}
+
+.student-info h1 {
+    font-size: 1.2rem;
+    color: #34495e;
+    letter-spacing: 0.5px;
+}
+
+.student-info p {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+/* Dropdown */
+.attendance-filter {
+    padding: 20px;
+}
+
+.attendance-filter h2 {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.dropdown-box {
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    color: #7f8c8d;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.active-tab-container {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.active-tab {
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 0.9rem;
+}
+
+.underline {
+    width: 70px;
+    height: 4px;
+    background-color: #3498db;
+    margin-top: 8px;
+}
+
+/* Attendance Card */
+.content-area {
+    background-color: #f8f9fa;
+    padding: 20px;
+    min-height: 300px;
+}
+
+.attendance-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.progress-circle {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: conic-gradient(#3498db 0% 100%, #eee 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.inner-circle {
+    width: 110px;
+    height: 110px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.percentage-text {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #3498db;
+}
+
+.stats {
+    flex-grow: 1;
+}
+
+.stat-row {
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.label {
+    display: block;
+    color: #7f8c8d;
+    margin-bottom: 2px;
+}
+
+.value {
+    font-weight: bold;
+    color: #333;
+}
+
