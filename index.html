@@ -1,70 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Dashboard</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<title>Screen Share Test</title>
 </head>
 <body>
-    <div class="mobile-container">
-        <header class="navbar">
-            <i class="fa-solid fa-bars menu-icon"></i>
-            <span class="college-name">ANNAPOORANA ENGIN...</span>
-            <div class="small-profile-pic">
-                <img src="B.jpg">
-            </div>
-        </header>
 
-        <section class="profile-header">
-            <div class="large-profile-pic">
-                <img src="B.jpg" >
-            </div>
-            <div class="student-info">
-                <h1>BADHRISH</h1>
-                <p>ANNAPOORANA ENGINEERING COLLEGE (AUTONOMOUS)</p>
-                <p class="sub-info">SEM-1 | A | 2025-2026</p>
-            </div>
-        </section>
+<button id="btn">Share Screen</button>
+<video id="video" autoplay playsinline controls style="width:100%;"></video>
 
-        <section class="attendance-filter">
-            <h2>Attendance % / 2025-2026</h2>
-            <div class="dropdown-box">
-                <span>2025-2026, A, SEM-1, ECE</span>
-                <i class="fa-solid fa-chevron-down"></i>
-            </div>
-        </section>
+<script>
+document.getElementById("btn").onclick = async () => {
 
-        <nav class="tabs">
-            <span>SUBJECT-WISE</span>
-            <span>LOG</span>
-            <span>MONTHLY</span>
-        </nav>
-        <div class="active-tab-container">
-            <span class="active-tab">OVER ALL</span>
-            <div class="underline"></div>
-        </div>
+  if (!window.isSecureContext) {
+    alert("HTTPS required");
+    return;
+  }
 
-        <div class="content-area">
-            <div class="attendance-card">
-                <div class="progress-circle">
-                    <div class="inner-circle">
-                        <span class="percentage-text">100%</span>
-                    </div>
-                </div>
-                <div class="stats">
-                    <div class="stat-row">
-                        <span class="label">Overall percentage</span>
-                        <span class="value">: 100%</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="label">No. of periods present</span>
-                        <span class="value">: 400/402</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  if (!navigator.mediaDevices) {
+    alert("mediaDevices not supported");
+    return;
+  }
+
+  if (!navigator.mediaDevices.getDisplayMedia) {
+    alert("getDisplayMedia not supported");
+    return;
+  }
+
+  try {
+    const stream = await navigator.mediaDevices.getDisplayMedia({
+      video: true,
+      audio: true
+    });
+
+    document.getElementById("video").srcObject = stream;
+
+  } catch (err) {
+    alert(err.name + "\n" + err.message);
+  }
+};
+</script>
+
 </body>
 </html>
