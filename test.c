@@ -1,23 +1,18 @@
 #include <stdio.h>
-struct Student 
+int main() 
 {
-    char name[50];
-    int roll_no;
-    float marks;
-};
-
-    int main() 
-{
-    struct Student s;
-    printf("Enter name: ");
-    scanf("%s", s.name);
-    printf("Enter roll number: ");
-    scanf("%d", &s.roll_no);
-    printf("Enter marks: ");
-    scanf("%f", &s.marks);
-    printf("\n--- Student Details ---\n");
-    printf("Name: %s\n", s.name);
-    printf("Roll No: %d\n", s.roll_no);
-    printf("Marks: %.2f\n", s.marks);
+    FILE *fp;
+    char text[100];
+    fp = fopen("output.txt", "w"); // open file for writing
+    if (fp == NULL) 
+   {
+        printf("Error opening file!\n");
+        return 1;
+    }
+    printf("Enter text to write into file: ");
+    fgets(text, sizeof(text), stdin);
+    fprintf(fp, "%s", text);
+    fclose(fp);
+    printf("Data written successfully.\n");
     return 0;
 }
