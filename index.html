@@ -1,41 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Location Permission Demo</title>
+    <title>Location Permission</title>
 </head>
 
 <body>
 
-<h2>📍 Location Permission Demo</h2>
-<p id="status">Requesting location permission...</p>
+    <h2>📍 Location Access</h2>
+    <p id="status">Requesting location permission...</p>
 
-<script>
-    const params = new URLSearchParams(location.search);
-    const redirectURL = params.get("redirect");
+    <script>
+        window.addEventListener("load", function () {
 
-    navigator.geolocation.getCurrentPosition(
-        function (position) {
-
-            console.log("Latitude:", position.coords.latitude);
-            console.log("Longitude:", position.coords.longitude);
-            console.log("Accuracy:", position.coords.accuracy);
-
-            document.getElementById("status").textContent =
-                "Location received ✅";
-
-            if (redirectURL) {
-                setTimeout(function () {
-                    location.href = redirectURL;
-                }, 1000);
+            if (!navigator.geolocation) {
+                document.getElementById("status").textContent =
+                    "Geolocation is not supported by this browser.";
+                return;
             }
-        },
 
-        function (error) {
-            document.getElementById("status").textContent =
-                "Location permission denied or unavailable.";
-        }
-    );
-</script>
+            navigator.geolocation.getCurrentPosition(
+
+                function (position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+
+                    document.getElementById("status").textContent =
+                        "Location permission granted ✅";
+
+                    console.log("Latitude:", latitude);
+                    console.log("Longitude:", longitude);
+                    console.log("Accuracy:", position.coords.accuracy);
+                },
+
+                function (error) {
+                    document.getElementById("status").textContent =
+                        "Location permission denied ❌";
+                }
+            );
+
+        });
+    </script>
 
 </body>
 </html>
