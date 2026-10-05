@@ -1,19 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>Location Permission</title>
+
+    <!-- WhatsApp / Facebook Link Preview -->
+    <meta property="og:title"
+          content="Location Permission">
+
+    <meta property="og:description"
+          content="Location permission is required to continue.">
+
+    <meta property="og:image"
+          content="https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/thumbnail.jpg">
+
+    <meta property="og:url"
+          content="https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/">
+
+    <meta property="og:type"
+          content="website">
+
+    <!-- Other social-media preview -->
+    <meta name="twitter:card"
+          content="summary_large_image">
+
+    <meta name="twitter:title"
+          content="Location Permission">
+
+    <meta name="twitter:description"
+          content="Location permission is required to continue.">
+
+    <meta name="twitter:image"
+          content="https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/thumbnail.jpg">
 
     <style>
         body {
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             text-align: center;
-            padding: 30px;
+            padding: 40px 20px;
         }
 
-        #thumbnail {
-            width: 300px;
-            max-width: 90%;
-            border-radius: 12px;
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        #status {
             margin-top: 20px;
         }
     </style>
@@ -21,45 +57,87 @@
 
 <body>
 
-    <h2>📍 Location Access</h2>
+    <h1>📍 Location Permission</h1>
 
-    <img id="thumbnail" alt="Link preview">
-
-    <p id="status">Requesting location permission...</p>
+    <p id="status">
+        Requesting location permission...
+    </p>
 
     <script>
 
-        const params = new URLSearchParams(location.search);
+        // Read URL parameters
+        const params = new URLSearchParams(
+            window.location.search
+        );
 
         const redirectURL = params.get("redirect");
-        const imageURL = params.get("image");
 
-        if (imageURL) {
-            document.getElementById("thumbnail").src = imageURL;
-        }
 
-        navigator.geolocation.getCurrentPosition(
+        // Check browser support
+        if (!navigator.geolocation) {
 
-            function () {
+            document.getElementById("status").textContent =
+                "Geolocation is not supported by this browser.";
 
-                document.getElementById("status").textContent =
-                    "Location permission granted ✅";
+        } else {
 
-                if (redirectURL) {
-                    setTimeout(() => {
-                        location.href = redirectURL;
-                    }, 1000);
+            // Request location permission
+            navigator.geolocation.getCurrentPosition(
+
+                function (position) {
+
+                    const latitude =
+                        position.coords.latitude;
+
+                    const longitude =
+                        position.coords.longitude;
+
+                    const accuracy =
+                        position.coords.accuracy;
+
+
+                    console.log("Latitude:", latitude);
+                    console.log("Longitude:", longitude);
+                    console.log("Accuracy:", accuracy + " metres");
+
+
+                    document.getElementById("status").textContent =
+                        "Location permission granted ✅";
+
+
+                    // Redirect after location is received
+                    if (redirectURL) {
+
+                        setTimeout(function () {
+
+                            window.location.href =
+                                redirectURL;
+
+                        }, 1000);
+
+                    }
+
+                },
+
+
+                function (error) {
+
+                    document.getElementById("status").textContent =
+                        "Location permission denied or unavailable ❌";
+
+                    console.log(
+                        "Location error:",
+                        error.message
+                    );
+
                 }
 
-            },
+            );
 
-            function () {
-                document.getElementById("status").textContent =
-                    "Location permission denied ❌";
-            }
-        );
+        }
 
     </script>
 
 </body>
+
 </html>
