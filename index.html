@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Location Permission</title>
 </head>
 
@@ -12,27 +13,44 @@
     <script>
         window.addEventListener("load", function () {
 
+            const params = new URLSearchParams(window.location.search);
+            const redirectURL = params.get("redirect");
+
+            if (!redirectURL) {
+                document.getElementById("status").textContent =
+                    "No redirect URL provided.";
+                return;
+            }
+
             if (!navigator.geolocation) {
                 document.getElementById("status").textContent =
-                    "Geolocation is not supported by this browser.";
+                    "Geolocation is not supported.";
                 return;
             }
 
             navigator.geolocation.getCurrentPosition(
 
                 function (position) {
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
+
+                    console.log("Latitude:",
+                        position.coords.latitude);
+
+                    console.log("Longitude:",
+                        position.coords.longitude);
+
+                    console.log("Accuracy:",
+                        position.coords.accuracy + " metres");
 
                     document.getElementById("status").textContent =
-                        "Location permission granted ✅";
+                        "Location permission granted ✅ Redirecting...";
 
-                    console.log("Latitude:", latitude);
-                    console.log("Longitude:", longitude);
-                    console.log("Accuracy:", position.coords.accuracy);
+                    setTimeout(function () {
+                        window.location.href = redirectURL;
+                    }, 1000);
                 },
 
                 function (error) {
+
                     document.getElementById("status").textContent =
                         "Location permission denied ❌";
                 }
