@@ -1,58 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Birthday Surprise 🎂</title>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="styles.css">
+    <title>Location Permission Demo</title>
 </head>
 
 <body>
 
-  <!-- Floating Background Orbs -->
-  <div class="bg">
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-  </div>
+<h2>📍 Location Permission Demo</h2>
+<p id="status">Requesting location permission...</p>
 
-  <!-- MAIN CONTAINER -->
-  <div class="container">
+<script>
+    const params = new URLSearchParams(location.search);
+    const redirectURL = params.get("redirect");
 
-    <!-- COUNTDOWN -->
-    <div id="count" class="count">3</div>
+    navigator.geolocation.getCurrentPosition(
+        function (position) {
 
-    <!-- MESSAGE BOX -->
-    <div id="message" class="message">
+            console.log("Latitude:", position.coords.latitude);
+            console.log("Longitude:", position.coords.longitude);
+            console.log("Accuracy:", position.coords.accuracy);
 
-      <h1 id="birthdayText">
-        Happy Birthday 🎂
-      </h1>
+            document.getElementById("status").textContent =
+                "Location received ✅";
 
-      <p>
-        Wishing you a life full of happiness 💖<br/>
-        success 🌟 and beautiful memories ✨
-      </p>
+            if (redirectURL) {
+                setTimeout(function () {
+                    location.href = redirectURL;
+                }, 1000);
+            }
+        },
 
-      <!-- WhatsApp Button -->
-      <a id="replyBtn" class="reply-btn" target="_blank">
-        Send Reply 💬
-      </a>
-
-    </div>
-
-  </div>
-
-  <!-- Confetti Library -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-  <!-- JS -->
-  <script src="script.js"></script>
+        function (error) {
+            document.getElementById("status").textContent =
+                "Location permission denied or unavailable.";
+        }
+    );
+</script>
 
 </body>
 </html>
